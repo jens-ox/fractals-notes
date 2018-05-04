@@ -1,0 +1,123 @@
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{mathtools}
+
+\RequirePackage{hyperref}
+\RequirePackage{amsmath}
+\RequirePackage{wrapfig}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\let\mathbbalt\mathbb
+\RequirePackage{fdsymbol}
+\RequirePackage[eqno]{tabfigures}
+\RequirePackage{natbib}
+\RequirePackage{index}
+\RequirePackage{tikz}
+
+\RequirePackage{tcolorbox}
+
+\RequirePackage[ngerman]{babel}
+
+\hypersetup{
+    colorlinks,
+    linkcolor={red!70!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\InputIfFileExists{glyphtounicode}{\pdfgentounicode=1}{}
+
+% Math declarations
+\newcommand{\N}{\mathbbalt{N}}
+\newcommand{\Z}{\mathbbalt{Z}}
+\newcommand{\Q}{\mathbbalt{Q}}
+\newcommand{\R}{\mathbbalt{R}}
+\renewcommand{\C}{\mathbbalt{C}}
+
+\newcommand{\ot}{\leftarrow}
+\newcommand{\To}{\implies}
+
+\newcommand{\e}{\text{\rmfamily e}}
+\renewcommand{\i}{\text{\rmfamily i}}
+\renewcommand{\O}{\mathcal{O}}
+
+\let\lim\undefined
+\DeclareMathOperator{\lim}{lim}
+\let\liminf\undefined
+\DeclareMathOperator{\liminf}{lim\,inf}
+\let\limsup\undefined
+\DeclareMathOperator{\limsup}{lim\,sup}
+
+\let\origphi\phi
+\let\phi\varphi
+\let\origtheta\theta
+% \let\theta\vartheta
+\let\origepsilon\epsilon
+\let\epsilon\varepsilon
+\let\origupepsilon\upepsilon
+\let\upepsilon\upvarepsilon
+
+\let\smallfrac\@undefined
+\newcommand{\smallfrac}[2]{\ensuremath{\frac{#1}{#2}}}
+
+\newcommand{\term}[1]{\textcolor{red!70!black}{\textbf{#1}}}
+
+% Pfad, an dem Grafiken abgelegt werden
+\graphicspath{{assets/images/}}
+
+% schönere Malpunkte
+\mathcode`\*="8000
+{\catcode`\*\active\gdef*{\cdot}}
+
+% Punkte zu Kommas in Mathe-Umgebungen
+\DeclareMathSymbol{.}{\mathord}{letters}{"3B}
+
+% Römische Zahlen
+\newcommand{\rom}[1]{%
+  \textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+% Pseudocode-Umgebung
+\newenvironment{pseudocode}
+  {
+    \begin{tcolorbox}[colframe=black!3!white,left=0mm]
+    \ttfamily
+    \footnotesize
+  }
+  {
+    \end{tcolorbox}
+  }
+
+% Frage-Umgebung
+\newenvironment{theorembox}
+  {
+    \begin{tcolorbox}[colback=black!3!white,colframe=black!15!white,coltitle=black,fonttitle=\bfseries,arc=2mm,toprule=0.2mm,bottomrule=0.2mm,leftrule=0.2mm,rightrule=0.2mm,left=1mm,right=1mm,titlerule=0mm,middle=0.5mm,enlarge top by=5mm, enlarge bottom by=5mm]
+  }
+  {
+    \end{tcolorbox}
+  }
+
+% Inline-Code
+\newcommand{\code}[1]{\lstinline[language=c,basicstyle=\ttfamily]|#1|}
+
+
+
+\RequirePackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\RequirePackage{booktabs} % book-quality tables
+\RequirePackage{units}    % non-stacked fractions and better unit spacing
+\RequirePackage{multicol} % multiple column layout facilities
+\RequirePackage{lipsum}   % filler text
+\RequirePackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
