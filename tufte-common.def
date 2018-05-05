@@ -304,10 +304,6 @@
 
 \ifthenelse{\boolean{@tufte@luatex}}{%
   \RequirePackage{fontspec}
-  \RequirePackage[osf,sc]{mathpazo}
-  \setmainfont[Renderer=Basic, Numbers=OldStyle, Scale = 1.0]{TeX Gyre Pagella}
-  \setsansfont[Renderer=Basic, Scale=0.90]{TeX Gyre Heros}
-  \setmonofont[Renderer=Basic]{TeX Gyre Cursor}
 }{}
 
 %%
@@ -417,26 +413,26 @@
 %%
 % \RaggedRight allows hyphenation
 
-\setlength{\parindent}{1.0pc}%
+\setlength{\parindent}{0pt}%
 \setlength{\parskip}{0pt}%
 \RequirePackage{ragged2e}
 \setlength{\RaggedRightRightskip}{\z@ plus 0.08\hsize}
 
 % Paragraph indentation and separation for normal text
 \newcommand{\@tufte@reset@par}{%
-  \setlength{\RaggedRightParindent}{1.0pc}%
-  \setlength{\JustifyingParindent}{1.0pc}%
-  \setlength{\parindent}{1pc}%
-  \setlength{\parskip}{0pt}%
+  \setlength{\RaggedRightParindent}{0pt}%
+  \setlength{\JustifyingParindent}{0pt}%
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{4pt}%
 }
 \@tufte@reset@par
 
 % Paragraph indentation and separation for marginal text
 \newcommand{\@tufte@margin@par}{%
-  \setlength{\RaggedRightParindent}{0.5pc}%
-  \setlength{\JustifyingParindent}{0.5pc}%
-  \setlength{\parindent}{0.5pc}%
-  \setlength{\parskip}{0pt}%
+  \setlength{\RaggedRightParindent}{0pt}%
+  \setlength{\JustifyingParindent}{0pt}%
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{4pt}%
 }
 
 
@@ -656,7 +652,6 @@
 
 \DeclareTextFontCommand{\textsmallcaps}{\scshape}
 
-\RequirePackage{textcase} % provides \MakeTextUppercase and \MakeTextLowercase
 \def\allcapsspacing{\@tufte@warning{Proper spacing of ALL-CAPS letters has not been set up.}}
 \def\smallcapsspacing{\@tufte@warning{Proper spacing of small-caps letters has not been set up.}}
 \newcommand{\allcaps}[1]{\allcapsspacing{\MakeTextUppercase{#1}}}
@@ -1403,14 +1398,6 @@
 % If we're NOT using XeLaTeX and the `nofonts' class option was NOT provided,
 % we should load the Palatino, Helvetica, and Bera Mono fonts (if they are
 % installed.)
-
-\ifthenelse{\boolean{@tufte@loadfonts}\AND\NOT\boolean{@tufte@xetex}\AND\NOT\boolean{@tufte@luatex}}{%
-  \IfFileExists{mathpazo.sty}{\RequirePackage[osf,sc]{mathpazo}}{}
-  \IfFileExists{helvet.sty}{\RequirePackage[scaled=0.90]{helvet}}{}
-  \IfFileExists{beramono.sty}{\RequirePackage[scaled=0.85]{beramono}}{}
-  \RequirePackage[T1]{fontenc}
-  \RequirePackage{textcomp}
-}{}
 
 
 %%

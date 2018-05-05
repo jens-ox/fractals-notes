@@ -14,6 +14,11 @@
 \RequirePackage{index}
 \RequirePackage{tikz}
 
+% Fonts
+\RequirePackage{crimson}
+\RequirePackage{FiraSans}
+\RequirePackage[ttdefault=true]{AnonymousPro}
+
 \RequirePackage{tcolorbox}
 
 \RequirePackage[ngerman]{babel}
@@ -121,3 +126,10 @@
 \newcommand{\doccls}[1]{\texttt{#1}}% document class name
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 \newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+% Redefine emph
+\renewcommand{\emph}[1]{\textcolor{red!70!black}{#1}}
+
+% Redefine math min/max
+\renewcommand{\min}{\text{min}}
+\renewcommand{\max}{\text{max}}
