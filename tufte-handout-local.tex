@@ -129,7 +129,16 @@
 
 % Redefine emph
 \renewcommand{\emph}[1]{\textcolor{red!70!black}{#1}}
+\newcommand{\ital}[1]{\itshape{}#1\normalfont{}}
 
 % Redefine math min/max
 \renewcommand{\min}{\text{min}}
 \renewcommand{\max}{\text{max}}
+
+% Proof environment
+\newenvironment{proof}
+  {\small\textbf{Beweis}\itshape \\}
+  {\normalfont}
+
+% QED symbol
+\newcommand{\qed}{\tag*{\( \square \)}}

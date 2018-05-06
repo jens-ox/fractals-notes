@@ -78,21 +78,20 @@ Ein wichtiger Sonderfall einer Kontraktion liegt vor, wenn
 \end{equation*}
 Eine solche Kontraktion wird \emph{Ähnlichkeitsabbildung} genannt, \( c \) heißt hier \emph{Kontraktionsverhältnis}.
 
-\subsection{Iterierte Funktionensysteme (IFS)}
+\subsection{Banachscher Fixpunktsatz}
 
-Ein \emph{iteriertes Funktionensystem} (IFS) ist Familie endlich vieler Kontraktionen auf einem vollständigen metrischen Raum, hier sei \( (X,d) \) ein solcher Raum und \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) eine solche Familie.
-
-Der \emph{Kontraktionskoeffizient} eines solchen IFS ist der größte Kontraktionsfaktor seiner Kontraktionen:
+Ein wichtiges Resultat an dieser Stelle ist der \emph{banachsche Fixpunktsatz}. Er besagt, dass für eine Kontraktion \( \phi \) (wie oben) und eine iterativ definierte Folge
 \begin{equation*}
-  c = \max\left \{ c_1, \dots,c_n \right \} \quad \text{(\( c_i \coloneqq \) Kontraktionsfaktor von \( \Phi_i \))}
+  {(x_n)}_{n \in \N}\text{,} \quad x_{n+1} = \phi(x_n)
+\end{equation*}
+für einen \ital{beliebigen} Startwert \( x_0 \) genau ein \( \widetilde{x} \in X \) existiert, sodass \( \phi(\widetilde{x}) = \widetilde{x} \). Außerdem gilt
+\begin{equation*}
+  \underset{n \to \infty}{\lim} x_n = \widetilde{x}\text{.}
 \end{equation*}
 
-Erhält man durch Vereinigung der Bilder der Kontraktionen von einer festen Teilmenge \( C \subset X \) wieder \( C \), so ist C der \emph{Attraktor} dieses IFS.\@ Formal:
-\begin{equation*}
-  C = \bigcup_{i=1}^n \Phi_i(C)\text{.}
-\end{equation*}
+Dieser \emph{Fixpunkt} \( \widetilde{x} \) ist also der Grenzwert der obigen Iteration, unabhängig vom gewählten Startwert!
 
-\section{(Affine) Transformationen}
+\subsection{(Affine) Transformationen}
 
 Aus den Vorlesungen über Lineare Algebra sind lineare Transformationen bekannt. Sie bilden Geraden auf Geraden ab und fixieren den Ursprung. Dargestellt werden können sie durch die Multiplikation eines Vektors mit einer Matrix:
 \begin{equation*}
@@ -163,8 +162,110 @@ Daraufhin lassen sich folgende Gleichungen lösen:
 
 So lassen sich die 6 Parameter einer zugehörigen affinen Transformation bestimmen.
 
+\subsection{Iterierte Funktionensysteme (IFS)}
+
+Ein \emph{iteriertes Funktionensystem} (IFS) ist Familie endlich vieler Kontraktionen auf einem vollständigen metrischen Raum, hier sei \( (X,d) \) ein solcher Raum und \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) eine solche Familie.
+
+Der \emph{Kontraktionskoeffizient} eines solchen IFS ist der größte Kontraktionsfaktor seiner Kontraktionen:
+\begin{equation*}
+  c = \max\left \{ c_1, \dots,c_n \right \} \quad \text{(\( c_i \coloneqq \) Kontraktionsfaktor von \( \Phi_i \))}
+\end{equation*}
+
+Erhält man durch Vereinigung der Bilder der Kontraktionen von einer festen Teilmenge \( C \subset X \) wieder \( C \), so ist C der \emph{Attraktor} dieses IFS.\@ Formal:
+\begin{equation*}
+  C = \bigcup_{i=1}^n \Phi_i(C)\text{.}
+\end{equation*}
+
+\section{Modellierung ``echter'' Bilder}
+
+Gegenstand dieses Vortrags ist die Codierung von Bildern mithilfe von Werkzeugen aus der fraktalen Geometrie. Aber was ist ein Bild eigentlich?
+
+Barnsley modelliert solche Bilder entlang von fünf Eigenschaften, die ein Bild haben soll.
+
+\subsection{Die Menge aller echten Bilder}
+
+Grob beschrieben ist ein echtes Bild etwas, dass man irgendwo sehen oder sich zumindest zu sehen vorstellen könnte. Es sei \( \mathcal{R} \) die Menge aller echten Bilder und \( \mathcal{I} \in \mathcal{R} \) ein echtes Bild. Dieses muss folgende Eigenschaften erfüllen:
+
+\begin{enumerate}
+  \item Es besitzt einen \emph{Träger} \( \largesquare = [a,b] \times [c,d] \subset \R^2 \) und die \emph{Maße} \( (b-a) \) und \( (d-c) \). Der Träger kann beispielsweise eine Tafel oder ein Blatt Papier sein, die Maße sind in einer festen Einheit, beispielsweise Meter.
+
+  Durch den Träger wird ein Bild in den mit der Standardmetrik versehenen euklidischen Raum eingebettet, wodurch die bekannten Werkzeuge aus Geometrie und Topologie zur Verfügung stehen.
+
+  \item Es besitzt gewisse chromatische Werte. Ein chromatischer Wert ist eine Funktion
+  \begin{equation*}
+    c: \largesquare \to \R\text{,}
+  \end{equation*}
+  die jedem Punkt des Bildes einen reellwertigen Wert zuordnet. Wir werden in diesem Vortrag nur Bilder in Graustufen betrachten, deswegen reicht für uns ein chromatischer Wert; die Helligkeit an einem bestimmten Punkt.
+
+  \item Einem Bild \( \mathcal{I} \in \mathcal{R} \) ist \ital{keine} Auflösung zugeordnet. Das heißt, dass es für beliebige, endliche Auflösungen beschrieben werden kann, und diese Beschreibungen dasselbe \( \mathcal{I} \in \mathcal{R} \) beschreiben. Die Rasterung findet separat statt.
+
+  \item \( \mathcal{R} \) ist unter Zuschneiden von Bildern abgeschlossen. Das bedeutet, dass ein fester Bereich \( \widetilde{\mathcal{I}} \) eines \( \mathcal{I} \in \mathcal{R} \) ein eigenständiges Bild und somit \( \in \mathcal{R} \) ist.
+
+  \item \( \mathcal{R} \) ist unter invertierbaren affinen Transformationen abgeschlossen. Das bedeutet, dass kein \( \mathcal{I} \in \mathcal{R} \) beliebig vergrößert, verkleinert, gestreckt, gespiegelt, gestaucht und repositioniert werden kann, sodass die Transformation nicht in \( \mathcal{R} \) liegt.
+\end{enumerate}
+
+\subsection{Digitalisierung und Rasterung}
+
+Digitalisierung und Rasterung sollen in diesem Vortrag nicht näher besprochen werden. Hier werden \( \mathcal{I} \in \mathcal{R} \) auf Pixel abgebildet, wozu Modelle aus verschiedenen mathematischen Bereichen zur Rasterung und Interpolation verwendet werden.
 
 \section{Collage-Theorem}
+
+Wir haben in anderen Vorträgen gesehen, dass mithilfe eines IFS komplexe Bilder mit nur wenigen Kontraktionen beschrieben werden können.
+
+Idee ist nun, statt ein Bild aus einem vorgegebenen IFS zu generieren, ein möglichst passendes IFS für ein gegebenes Bild zu finden. Offensichtlich wird ein gegebenes Bild in der Regel keine erkennbare selbstähnliche Struktur besitzen. Das \emph{Collage-Theorem} erlaubt die Konstruierung von iterierten Funktionensystemen, deren Attraktoren einem gegebenen Bild möglichst genau entsprechen.
+
+\begin{theorembox}
+  \textbf{Collage-Theorem} \\
+  \vspace{1mm}
+  Sei \( (X,d) \) ein vollständiger metrischer Raum, \( L \in \mathcal{H}(X) \), \( \epsilon \geq 0 \).
+
+  Bestimme ein IFS \( \left \{ \Phi_1,\dots,\Phi_n \right \} \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \) derart, dass
+  \begin{align*}
+    h\left( L,\bigcup_{i=0}^n \Phi_i(L) \right) \leq \epsilon \quad &\text{(\( h \): Hausdorff-Metrik).}
+    \intertext{Dann gilt:}
+    h(L,A) \leq \frac{\epsilon}{1 - s} \quad &\text{(\( A \): Attraktor des IFS).}
+  \end{align*}
+\end{theorembox}
+
+Um ein gegebenes Bild \( L \in \mathcal{H}(X) \) durch den Attraktor eines IFS anzunähern, muss die Vereinigung (``Collage'') der Kontraktionen des IFS, angewandt auf das gegebene Bild \( L \), dem gegebenen Bild ähneln (im Sinne der Hausdorff-Metrik).
+
+\begin{proof}
+  Wir zeigen, dass in einem vollständigen metrischen Raum \( (X, d) \) für eine Kontraktion \( f: X \to X \) mit einem Konstraktionsfaktor \( 0 \leq s < 1 \) und einem Fixpunkt \( \widetilde{x} \in X \) gilt:
+  \begin{equation*}
+    d(x,\widetilde{x}) \leq \frac{d(x,f(x))}{1-s}\text{.}
+  \end{equation*} 
+  Wir nutzen dazu die Stetigkeit der Abstandsfunktion. Es gilt also
+  \begin{align*}
+    d(x,\widetilde{x}) &= d\left( x, \underset{n \to \infty}{\lim} f^n(x) \right) = \underset{n \to \infty}{\lim}d(x,f^n(x)) \\
+    &\leq \underset{n \to \infty}{\lim}\sum_{m = 1}^n d(f^{m-1}(x),f^m(x)) \\
+    &\leq \underset{n \to \infty}{\lim} d(x,f(x))(1+s+\cdots+s^{n-1}) \\
+    &\leq \frac{d(x,f(x))}{1-s}\text{.} \qed
+  \end{align*}
+\end{proof}
+
+\section{Stetige Abhängigkeit von Parametern}
+
+Ein weiterer wichtiger Satz zur Komprimierung von Bildern ist der Satz über die stetige Abhängigkeit des Attraktors eines IFS von den Parametern des IFS:\@
+
+\begin{theorembox}
+  \textbf{Stetige Abhängigkeit von Parametern} \\
+  \vspace{1mm}
+  Es seien \( (P, d_P) \) ein metrischer und \( (X,d) \) ein vollständiger metrischer Raum, außerdem sei \( \Phi : P \times X \to X \) eine Familie von Kontraktionen auf \( X \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \). Für jedes \( p \in P \) ist also \( \Phi(p, \cdot) \) eine Kontraktion auf \( X \).
+
+  \vspace{1em}
+  Für jedes \( x \in X \) sei \( \Phi \) stetig auf \( P \). Dann ist der Fixpunkt von \( \Phi \) stetig abhängig von \( p \).
+
+  \vspace{1em}
+  Das heißt: \( \widetilde{x} : P \to X \) ist stetig.
+\end{theorembox}
+
+\begin{proof}
+  Sei \( \widetilde{x}(p) \) der Fixpunkt von \( \Phi \) für festes \( p \in P \). Es seien \( p \in P \) und \( \epsilon > 0 \) gegeben. Dann gilt für alle \( q \in P \):
+  \begin{align*}
+    d(\widetilde{x}(p),\widetilde{x}(q)) &= d(\Phi(p,\widetilde{x}(p)), \Phi(q, \widetilde{x}(q)))
+  \end{align*}
+\end{proof}
+
 
 \section{Page Layout}\label{sec:page-layout}
 \subsection{Headings}\label{sec:headings}
