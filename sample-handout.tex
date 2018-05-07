@@ -15,7 +15,15 @@
 
 \begin{abstract}
 \noindent
-  Inhalt des Vortrags ist \dots
+  Inhalt des Vortrags ist
+  \begin{enumerate}
+    \item eine Übersicht über die bisher erlernten Werkzeuge, die für die theoretischen Grundlagen der fraktalen Bildcodierung benötigt werden,
+    \item das Collage-Theorem,
+    \item die stetige Abhängigkeit zwischen dem Attraktor eines IFS und den Parametern seiner Kontraktionen,
+    \item (TODO) die Erläuterung von einfachen fraktalen Bildcodierungen anhand der Quadtree-Methode,
+    \item (TODO) eine Übersicht über fortgeschrittene Methoden der fraktalen Bildcodierung und
+    \item (TODO) der Vergleich von fraktaler Bildcodierung mit anderen, DCT-basierten Bildkomprimierungsverfahren.
+  \end{enumerate}
 \end{abstract}
 
 \section{Recap --- bisherige Themen}
@@ -229,7 +237,7 @@ Idee ist nun, statt ein Bild aus einem vorgegebenen IFS zu generieren, ein mögl
 
 Um ein gegebenes Bild \( L \in \mathcal{H}(X) \) durch den Attraktor eines IFS anzunähern, muss die Vereinigung (``Collage'') der Kontraktionen des IFS, angewandt auf das gegebene Bild \( L \), dem gegebenen Bild ähneln (im Sinne der Hausdorff-Metrik).
 
-\begin{proof}
+\begin{proof}{}
   Wir zeigen, dass in einem vollständigen metrischen Raum \( (X, d) \) für eine Kontraktion \( f: X \to X \) mit einem Konstraktionsfaktor \( 0 \leq s < 1 \) und einem Fixpunkt \( \widetilde{x} \in X \) gilt:
   \begin{equation*}
     d(x,\widetilde{x}) \leq \frac{d(x,f(x))}{1-s}\text{.}
@@ -245,263 +253,115 @@ Um ein gegebenes Bild \( L \in \mathcal{H}(X) \) durch den Attraktor eines IFS a
 
 \section{Stetige Abhängigkeit von Parametern}
 
-Ein weiterer wichtiger Satz zur Komprimierung von Bildern ist der Satz über die stetige Abhängigkeit des Attraktors eines IFS von den Parametern des IFS:\@
+Ein weiterer wichtiger Satz zur Komprimierung von Bildern ist der Satz über die stetige Abhängigkeit des Attraktors eines IFS von den Parametern des IFS.\@ Diese stetige Abhängigkeit wird uns erlauben, durch kleine Änderungen der Parameter kleine Änderungen am Attraktor eines IFS provozieren zu können (und große durch große). Eine praktische Folgerung ist außerdem, dass zwischen verschiedenen Attraktoren ein stetiger Übergang durch Parameteränderungen konstruiert werden kann --- diese Eigenschaft ist besonders praktisch zur Konstruktion und Komprimierung von animierten Bildern und Filmmaterial.
 
 \begin{theorembox}
-  \textbf{Stetige Abhängigkeit von Parametern} \\
+  \textbf{Stetige Abhängigkeit von Parametern --- Fixpunkt} \\
   \vspace{1mm}
-  Es seien \( (P, d_P) \) ein metrischer und \( (X,d) \) ein vollständiger metrischer Raum, außerdem sei \( \Phi : P \times X \to X \) eine Familie von Kontraktionen auf \( X \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \). Für jedes \( p \in P \) ist also \( \Phi(p, \cdot) \) eine Kontraktion auf \( X \).
+  Es seien \( (P, d_P) \) ein metrischer und \( (X,d) \) ein vollständiger metrischer Raum, außerdem sei \( \Phi_{p \in P} : X \to X \) eine Familie von Kontraktionen auf \( X \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \). Für jedes \( p \in P \) ist also \( \Phi_p \in \Phi \) eine Kontraktion auf \( X \).
 
   \vspace{1em}
-  Für jedes \( x \in X \) sei \( \Phi \) stetig auf \( P \). Dann ist der Fixpunkt von \( \Phi \) stetig abhängig von \( p \).
+  Für jedes \( x \in X \) sei \( \Phi \) stetig auf \( P \). Dann ist der Fixpunkt \( \widetilde{x}_p \) von \( \Phi \) stetig abhängig von \( p \).
 
   \vspace{1em}
   Das heißt: \( \widetilde{x} : P \to X \) ist stetig.
 \end{theorembox}
 
-\begin{proof}
-  Sei \( \widetilde{x}(p) \) der Fixpunkt von \( \Phi \) für festes \( p \in P \). Es seien \( p \in P \) und \( \epsilon > 0 \) gegeben. Dann gilt für alle \( q \in P \):
+\begin{proof}{}
+  Es seien \( p \in P \) und \( \epsilon > 0 \) gegeben. Dann gilt für alle \( q \in P \):
   \begin{align*}
-    d(\widetilde{x}(p),\widetilde{x}(q)) &= d(\Phi(p,\widetilde{x}(p)), \Phi(q, \widetilde{x}(q)))
+    d(\widetilde{x}_p,\widetilde{x}_q) &= d(\Phi_p(\widetilde{x}_p), \Phi_q(\widetilde{x}_q)) \\
+      &\leq d(\Phi_p(\widetilde{x}_p), \Phi_q(\widetilde{x}_p)) + d(\Phi_q(\widetilde{x}_p), \Phi_q(\widetilde{x}_q)) \\
+      &\leq d(\Phi_p(\widetilde{x}_p), \Phi_q(\widetilde{x}_p)) + s * d(\widetilde{x}_p, \widetilde{x}_q)\text{.}
+  \end{align*}
+  Das impliziert, dass
+  \begin{equation*}
+    d(\widetilde{x}_p, \widetilde{x}_q) \leq \frac{d(\Phi_p(\widetilde{x}_p), \Phi_q(\widetilde{x}_p))}{1-s}
+  \end{equation*}
+  Die rechte Seite des Terms kann beliebig klein gemacht werden, indem \( q \) nach genug bei \( p \) gewählt wird. Offensichtlich existiert ein \( C \in \R \) derart, dass
+  \begin{equation*}
+    d(\Phi_p(x), \Phi_q(x)) \leq C * d(p,q)
+  \end{equation*}
+  für alle \( p,q \in P \) und \( x \in X \). Also
+  \begin{align*}
+    d(\widetilde{x}_p, \widetilde{x}_q) \leq \frac{C * d(p,q)}{1-s}\text{.}
+    \intertext{Das ist eine sinnvolle Abschätzung und beendet den Beweis.} \qed
   \end{align*}
 \end{proof}
 
+Sinnvoll wird diese Erkenntnis allerdings erst, wenn wir die stetige Abhängigkeit zwischen den IFS-Parametern und dem tatsächlichen Attraktor des IFS zeigen können. Dazu schränken wir die Kontraktionen der IFS auf Lipschitz-stetige Kontraktionen ein --- das bedeutet, dass für ein mit \( p \in P \) parametrisiertes IFS
+\begin{equation*}
+  \left \{ \Phi_{1_p},\dots,\Phi_{n_p} \right \} \quad \text{(\( \Phi_{i_p} \) stetig)}
+\end{equation*}
+ein \( k \in \R_{> 0} \) existiert, sodass gilt:
+\begin{equation*}
+  d(\Phi_{i_p}(x), \Phi_{i_q}(x)) \leq k * d_P(p,q)\text{.}
+\end{equation*}
+Das ist nicht die allgemeinste Forderung, aber sie ist einfach zu handhaben und reicht für unsere Zwecke aus.
 
-\section{Page Layout}\label{sec:page-layout}
-\subsection{Headings}\label{sec:headings}
-This style provides \textsc{a}- and \textsc{b}-heads (that is,
-\Verb|\section| and \Verb|\subsection|), demonstrated above.
+Unser Ziel ist nun, für beliebiges \( B \in \mathcal{H}(X) \) nachzuweisen, dass gilt:
+\begin{equation*}
+  h(\Phi_{i_p}(B), \Phi_{i_q}(B)) \leq k * d_P(p,q)\text{.} \tag*{(1)}
+\end{equation*}
 
-The Tufte-\LaTeX\ classes will emit an error if you try to use
-\linebreak\Verb|\subsubsection| and smaller headings.
+Das bedeutet, dass der ``Unterschied'' zwischen den Bildern von \( B \) unter zwei verschieden parametrierten Kontraktionen nach oben durch ein Vielfaches des Abstands der Parameter abgeschätzt werden kann.
 
-% let's start a new thought -- a new section
-\newthought{In his later books},\cite{Tufte2006} Tufte
-starts each section with a bit of vertical space, a non-indented paragraph,
-and sets the first few words of the sentence in \textsc{small caps}.  To
-accomplish this using this style, use the \Verb|\newthought| command:  
-\begin{docspec}
-  \doccmd{newthought\{In his later books\}, Tufte starts\ldots}
-\end{docspec}
+\begin{proof}{(1)}
+  Diese Aussage kann leicht nachgewiesen werden, indem die Eigenschaften einer Metrik nachgegangen werden:
+  \begin{equation*}
+    h(\Phi_p(B), \Phi_q(B)) = \max\left \{ d(\Phi_p(B), \Phi_q(B)), d(\Phi_q(B), \Phi_p(B)) \right \}
+  \end{equation*}
+  mit
+  \begin{align*}
+    d(\Phi_p(B), \Phi_q(B)) &= \max_{x \in \Phi_p(B)}(d(x, \Phi_q(B)))\text{,} \\
+    d(x,\Phi_q(B)) &= \min_{y \in \Phi_q(B)}(d(x,y))\text{.}
+  \end{align*}
+  \( x \in \Phi_p(B) \) bedeutet, dass es ein \( x' \in B \) gibt, sodass \( x = \Phi_p(x') \). Außerdem gibt es dan ein \( \Phi_q(x') \in \Phi_q(B) \). Für diesen Punkt gilt unsere Anforderung. Es folgt
+  \begin{equation*}
+    d(x, \Phi_q(x')) \leq k * d_P(p,q) \Rightarrow \min_{y \in \Phi_q(B)}(d(x,y)) \leq d(x, \Phi_q(x')) \leq k * d_P(p,q)\text{.}
+  \end{equation*}
+  Wir erhalten also
+  \begin{equation*}
+    d(\Phi_p(B), \Phi_q(B)) \leq k * d_P(p,q)\text{.}
+  \end{equation*}
+  Die Argumentation für \( d(\Phi_q(B), \Phi_p(B)) \) ist analog, wir haben also
+  \begin{equation*}
+    h(\Phi_p(B), \Phi_q(B)) \leq k * d_P(p,q)\text{.}
+  \end{equation*}
+  Für endliches \( n \) erhalten wir ein endliches IFS \( \left \{ \Phi_{1_p},\dots,\Phi_{n_p} \right \} \) mit zugehörigen Konstanten \( k_1,\dots,k_n \). Wähle
+  \begin{equation*}
+    k \coloneqq \max\left \{ k_1,\dots,k_n \right \}\text{.}
+  \end{equation*}
+  und somit erhalten wir letztendlich
+  \begin{equation*}
+    h(\Phi_{i_p}(B),\Phi_{i_q}(B)) \leq k * d_P(p,q)\text{.}\qed
+  \end{equation*}
+\end{proof}
+Die Vereinigung solcher Bilder kann sich von Parameter zu Parameter offensichtlich nicht stärker verändern als die maximale Hausdorff-Distanz von oben. Es gilt also
+\begin{equation*}
+  h\left( W_p(B), W_q(B) \right) \leq k * d_P(p,q)\text{,}
+\end{equation*}
+wobei
+\begin{equation*}
+  W_p(B) = \bigcup_{i=1}^n \Phi_{i_p}(B)\text{,}
+\end{equation*}
+\( W_q(B) \) respektive. Wenden wir nun das Resultat der stetigen Abhängigkeit von Fixpunkten an, so erhalten wir
+\begin{equation*}
+  h(A_p,A_q) \leq \frac{h(A_p, W_q(A_p))}{1-s} \leq k * \frac{d_P(p,q)}{1-s}\text{.}
+\end{equation*}
+Das lässt sich in folgendem Satz zusammenfassen:
 
-\subsection{Sidenotes}\label{sec:sidenotes}
-One of the most prominent and distinctive features of this style is the
-extensive use of sidenotes.  There is a wide margin to provide ample room
-for sidenotes and small figures.  Any \Verb|\footnote|s will automatically
-be converted to sidenotes.\footnote{This is a sidenote that was entered
-using the \texttt{\textbackslash footnote} command.}  If you'd like to place ancillary
-information in the margin without the sidenote mark (the superscript
-number), you can use the \Verb|\marginnote| command.\marginnote{This is a
-margin note.  Notice that there isn't a number preceding the note, and
-there is no number in the main text where this note was written.}
+\begin{theorembox}
+  \textbf{Stetige Abhängigkeit von Parametern --- Attraktor} \\
+  \vspace{1mm}
+  Es sei \( (X,d) \) ein vollständiger metrischer Raum und \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) ein IFS mit Kontraktionskoeffizient \( s \), wobei \( \Phi_i \) von \( p \in (P, d_P) \) im Sinne der Einschränkung
+  \begin{equation*}
+    d(\Phi_{i_p}(x), \Phi_{i_q}(x)) \leq k * d_P(p,q)
+  \end{equation*}
+  für beliebiges \( x \) abhänge.
 
-The specification of the \Verb|\sidenote| command is:
-\begin{docspec}
-  \doccmd{sidenote[\docopt{number}][\docopt{offset}]\{\docarg{Sidenote text.}\}}
-\end{docspec}
-
-Both the \docopt{number} and \docopt{offset} arguments are optional.  If you
-provide a \docopt{number} argument, then that number will be used as the
-sidenote number.  It will change of the number of the current sidenote only and
-will not affect the numbering sequence of subsequent sidenotes.
-
-Sometimes a sidenote may run over the top of other text or graphics in the
-margin space.  If this happens, you can adjust the vertical position of the
-sidenote by providing a dimension in the \docopt{offset} argument.  Some
-examples of valid dimensions are:
-\begin{docspec}
-  \ttfamily 1.0in \qquad 2.54cm \qquad 254mm \qquad 6\Verb|\baselineskip|
-\end{docspec}
-If the dimension is positive it will push the sidenote down the page; if the
-dimension is negative, it will move the sidenote up the page.
-
-While both the \docopt{number} and \docopt{offset} arguments are optional, they
-must be provided in order.  To adjust the vertical position of the sidenote
-while leaving the sidenote number alone, use the following syntax:
-\begin{docspec}
-  \doccmd{sidenote[][\docopt{offset}]\{\docarg{Sidenote text.}\}}
-\end{docspec}
-The empty brackets tell the \Verb|\sidenote| command to use the default
-sidenote number.
-
-If you \emph{only} want to change the sidenote number, however, you may
-completely omit the \docopt{offset} argument:
-\begin{docspec}
-  \doccmd{sidenote[\docopt{number}]\{\docarg{Sidenote text.}\}}
-\end{docspec}
-
-The \Verb|\marginnote| command has a similar \docarg{offset} argument:
-\begin{docspec}
-  \doccmd{marginnote[\docopt{offset}]\{\docarg{Margin note text.}\}}
-\end{docspec}
-
-\subsection{References}
-References are placed alongside their citations as sidenotes,
-as well.  This can be accomplished using the normal \Verb|\cite|
-command.\sidenote{The first paragraph of this document includes a citation.}
-
-The complete list of references may also be printed automatically by using
-the \Verb|\bibliography| command.  (See the end of this document for an
-example.)  If you do not want to print a bibliography at the end of your
-document, use the \Verb|\nobibliography| command in its place.  
-
-To enter multiple citations at one location,\cite{Tufte2006,Tufte1990} you can
-provide a list of keys separated by commas and the same optional vertical
-offset argument: \Verb|\cite{Tufte2006,Tufte1990}|.  
-\begin{docspec}
-  \doccmd{cite[\docopt{offset}]\{\docarg{bibkey1,bibkey2,\ldots}\}}
-\end{docspec}
-
-\section{Figures and Tables}\label{sec:figures-and-tables}
-Images and graphics play an integral role in Tufte's work.
-In addition to the standard \docenv{figure} and \docenv{tabular} environments,
-this style provides special figure and table environments for full-width
-floats.
-
-Full page--width figures and tables may be placed in \docenv{figure*} or
-\docenv{table*} environments.  To place figures or tables in the margin,
-use the \docenv{marginfigure} or \docenv{margintable} environments as follows
-(see figure~\ref{fig:marginfig}):
-
-\begin{marginfigure}%
-  \includegraphics[width=\linewidth]{helix}
-  \caption{This is a margin figure.  The helix is defined by 
-    $x = \cos(2\pi z)$, $y = \sin(2\pi z)$, and $z = [0, 2.7]$.  The figure was
-    drawn using Asymptote (\url{http://asymptote.sf.net/}).}
-  \label{fig:marginfig}
-\end{marginfigure}
-\begin{Verbatim}
-\begin{marginfigure}
-  \includegraphics{helix}
-  \caption{This is a margin figure.}
-\end{marginfigure}
-\end{Verbatim}
-
-The \docenv{marginfigure} and \docenv{margintable} environments accept an optional parameter \docopt{offset} that adjusts the vertical position of the figure or table.  See the ``\nameref{sec:sidenotes}'' section above for examples.  The specifications are:
-\begin{docspec}
-  \doccmd{begin\{marginfigure\}[\docopt{offset}]}\\
-  \qquad\ldots\\
-  \doccmd{end\{marginfigure\}}\\
-  \mbox{}\\
-  \doccmd{begin\{margintable\}[\docopt{offset}]}\\
-  \qquad\ldots\\
-  \doccmd{end\{margintable\}}\\
-\end{docspec}
-
-Figure~\ref{fig:fullfig} is an example of the \Verb|figure*|
-environment and figure~\ref{fig:textfig} is an example of the normal
-\Verb|figure| environment.
-
-\begin{figure*}[h]
-  \includegraphics[width=\linewidth]{sine.pdf}%
-  \caption{This graph shows $y = \sin x$ from about $x = [-10, 10]$.
-  \emph{Notice that this figure takes up the full page width.}}%
-  \label{fig:fullfig}%
-\end{figure*}
-
-\begin{figure}
-  \includegraphics{hilbertcurves.pdf}
-%  \checkparity This is an \pageparity\ page.%
-  \caption{Hilbert curves of various degrees $n$.
-  \emph{Notice that this figure only takes up the main textblock width.}}
-  \label{fig:textfig}
-  %\zsavepos{pos:textfig}
-  \setfloatalignment{b}
-\end{figure}
-
-Table~\ref{tab:normaltab} shows table created with the \docpkg{booktabs}
-package.  Notice the lack of vertical rules---they serve only to clutter
-the table's data.
-
-\begin{table}[ht]
-  \centering
-  \fontfamily{ppl}\selectfont
-  \begin{tabular}{ll}
-    \toprule
-    Margin & Length \\
-    \midrule
-    Paper width & \unit[8\nicefrac{1}{2}]{inches} \\
-    Paper height & \unit[11]{inches} \\
-    Textblock width & \unit[6\nicefrac{1}{2}]{inches} \\
-    Textblock/sidenote gutter & \unit[\nicefrac{3}{8}]{inches} \\
-    Sidenote width & \unit[2]{inches} \\
-    \bottomrule
-  \end{tabular}
-  \caption{Here are the dimensions of the various margins used in the Tufte-handout class.}
-  \label{tab:normaltab}
-  %\zsavepos{pos:normaltab}
-\end{table}
-
-\section{Full-width text blocks}
-
-In addition to the new float types, there is a \docenv{fullwidth}
-environment that stretches across the main text block and the sidenotes
-area.
-
-\begin{Verbatim}
-\begin{fullwidth}
-Lorem ipsum dolor sit amet...
-\end{fullwidth}
-\end{Verbatim}
-
-\begin{fullwidth}
-\small\itshape\lipsum[1]
-\end{fullwidth}
-
-\section{Typography}\label{sec:typography}
-
-\subsection{Typefaces}\label{sec:typefaces}
-If the Palatino, \textsf{Helvetica}, and \texttt{Bera Mono} typefaces are installed, this style
-will use them automatically.  Otherwise, we'll fall back on the Computer Modern
-typefaces.
-
-\subsection{Letterspacing}\label{sec:letterspacing}
-This document class includes two new commands and some improvements on
-existing commands for letterspacing.
-
-When setting strings of the
-letter\-spacing---that is, the spacing between the letters---should be
-increased slightly.\cite{Bringhurst2005}  The \Verb|\allcaps| command has proper letterspacing for
-strings of   These commands
-will also automatically convert the case of the text to upper- or
-lowercase, respectively.
-
-The \Verb|\textsc| command has also been redefined to include
-letterspacing.  The case of the \Verb|\textsc| argument is left as is,
-however.  This allows one to use both uppercase and lowercase letters:
-\textsc{The Initial Letters Of The Words In This Sentence Are Capitalized.}
-
-
-
-\section{Installation}\label{sec:installation}
-To install the Tufte-\LaTeX\ classes, simply drop the
-following files into the same directory as your \texttt{.tex}
-file:
-\begin{quote}
-  \ttfamily
-  tufte-book.cls\\
-  tufte-common.def\\
-  tufte-handout.cls\\
-  tufte.bst
-\end{quote}
-
-% TODO add instructions for installing it globally
-
-
-
-\section{More Documentation}\label{sec:more-doc}
-For more documentation on the Tufte-\LaTeX{} document classes (including commands not
-mentioned in this handout), please see the sample book.
-
-\section{Support}\label{sec:support}
-
-The website for the Tufte-\LaTeX\ packages is located at
-\url{https://github.com/Tufte-LaTeX/tufte-latex}.  On our website, you'll find
-links to our repository, mailing lists, bug tracker, and documentation.
-
-\bibliography{sample-handout}
-\bibliographystyle{plainnat}
-
-
+  \vspace{1em}
+  Dann ist der Attraktor \( A_p \in \mathcal{H}(X) \) stetig von \( p \) mittels der Hausdorff-Metrik \( h(d) \) abhängig.
+\end{theorembox}
 
 \end{document}
