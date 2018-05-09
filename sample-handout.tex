@@ -19,7 +19,7 @@
   \begin{enumerate}
     \item eine Übersicht über die bisher erlernten Werkzeuge, die für die theoretischen Grundlagen der fraktalen Bildcodierung benötigt werden,
     \item das Collage-Theorem,
-    \item die stetige Abhängigkeit zwischen dem Attraktor eines IFS und den Parametern seiner Kontraktionen,
+    \item die stetige Abhängigkeit zwischen dem Attraktor eines IFS und den Parametern der Kontraktionen,
     \item (TODO) die Erläuterung von einfachen fraktalen Bildcodierungen anhand der Quadtree-Methode,
     \item (TODO) eine Übersicht über fortgeschrittene Methoden der fraktalen Bildcodierung und
     \item (TODO) der Vergleich von fraktaler Bildcodierung mit anderen, DCT-basierten Bildkomprimierungsverfahren.
@@ -30,10 +30,10 @@
 
 \subsection{Metrischer Raum}
 
-Ein \emph{metrischer Raum} ist eine Menge \( X \) mit einer reellwertigen Funktion \( X \times X \to \R \). Diese misst den Abstand zwischen zwei Punkten \( x,y \in X \) und muss dazu folgende Axiome erfüllen (\( x,y,z \in X \)):
+Ein \emph{metrischer Raum} ist eine Menge \( X \) mit einer reellwertigen Funktion \( d: X \times X \to \R \). Diese misst den Abstand zwischen zwei Punkten \( x,y \in X \) und muss dazu folgende Axiome erfüllen (\( x,y,z \in X \)):
 \begin{enumerate}
   \item \textbf{Symmetrie}: \( d(x,y) = d(y,x) \)
-  \item \textbf{Positive Definitheit}: \( 0 \leq d(x,y) \) und \( d(x,y) = 0 \Rightarrow x = y \)
+  \item \textbf{Positive Definitheit}: \( 0 \leq d(x,y) \) und \( (d(x,y) = 0 \Rightarrow x = y) \)
   \item \textbf{Dreiecksungleichung}: \( d(x,z) \leq d(x,y) + d(y,z) \)
 \end{enumerate}
 
@@ -62,7 +62,7 @@ Wir erhalten den \emph{Raum der Fraktale}
 Für uns ist --- zumindest vorerst --- jede Teilmenge von \( (\mathcal{H}(X), h) \) ein Fraktal. Weiter kann gezeigt werden, dass folgender zentraler Satz über den Raum der Fraktale gilt:
 
 \begin{theorembox}
-  \textbf{Vollständigkeit des Raums der Fraktale} \\
+  \textbf{Satz}: \ital{Vollständigkeit des Raums der Fraktale} \\
   \vspace{1mm}
   Es gilt
   \begin{align*}
@@ -78,7 +78,7 @@ Eine \emph{Kontraktion} ist eine spezielle Abbildung \( \phi: X \to X \), für d
   \forall x,y \in X : d(\phi(x), \phi(y)) \bm{\leq} c * d(x,y)\text{.}
 \end{equation*}
 \( c \) wird hier als \emph{Kontraktionsfaktor} bezeichnet.
-Eine Kontraktion zieht eine Menge ``in sich selbst zusammen'' --- mindestens so stark wie eine zentrische Streckung mit festem Streckungsfaktor \( c < 1 \).
+Eine Kontraktion zieht eine Menge ``in sich selbst zusammen'' --- mindestens so stark wie eine Skalierung mit festem Skalierungsfaktor \( c < 1 \).
 
 Ein wichtiger Sonderfall einer Kontraktion liegt vor, wenn
 \begin{equation*}
@@ -88,34 +88,37 @@ Eine solche Kontraktion wird \emph{Ähnlichkeitsabbildung} genannt, \( c \) hei�
 
 \subsection{Banachscher Fixpunktsatz}
 
-Ein wichtiges Resultat an dieser Stelle ist der \emph{banachsche Fixpunktsatz}. Er besagt, dass für eine Kontraktion \( \phi \) (wie oben) und eine iterativ definierte Folge
+Ein wichtiges Resultat an dieser Stelle ist der \emph{Banachsche Fixpunktsatz}. Er besagt, dass für eine Kontraktion \( \phi \) (wie oben) und eine iterativ definierte Folge \( {(x_n)}_{n \in \N} \) in \( X \) mit
 \begin{equation*}
-  {(x_n)}_{n \in \N}\text{,} \quad x_{n+1} = \phi(x_n)
+  x_{n+1} = \phi(x_n)
 \end{equation*}
-für einen \ital{beliebigen} Startwert \( x_0 \) genau ein \( \widetilde{x} \in X \) existiert, sodass \( \phi(\widetilde{x}) = \widetilde{x} \). Außerdem gilt
-\begin{equation*}
-  \underset{n \to \infty}{\lim} x_n = \widetilde{x}\text{.}
-\end{equation*}
+folgende Aussagen gelten:
+\begin{enumerate}
+  \item Für einen \ital{beliebigen} Startwert \( x_0 \) existiert genau ein \( \widetilde{x} \in X \), sodass \( \phi(\widetilde{x}) = \widetilde{x} \).
+  \item Es ist \( \underset{n \to \infty}{\lim} x_n = \widetilde{x} \).
+\end{enumerate}
 
-Dieser \emph{Fixpunkt} \( \widetilde{x} \) ist also der Grenzwert der obigen Iteration, unabhängig vom gewählten Startwert!
+Dieses \( \widetilde{x} \) wird \emph{Fixpunkt} der Kontraktion \( \phi \) genannt.
 
 \subsection{(Affine) Transformationen}
 
 Aus den Vorlesungen über Lineare Algebra sind lineare Transformationen bekannt. Sie bilden Geraden auf Geraden ab und fixieren den Ursprung. Dargestellt werden können sie durch die Multiplikation eines Vektors mit einer Matrix:
 \begin{equation*}
-  t: \R^2 \ni \begin{pmatrix}
-    x \\ y
-  \end{pmatrix} \mapsto \begin{pmatrix}
+  t: \R^2 \to \R^2\text{,} \quad t(x,y) \coloneqq \begin{pmatrix}
     a & b \\ c & d
   \end{pmatrix} \begin{pmatrix}
     x \\ y
-  \end{pmatrix} \in \R^2
+  \end{pmatrix}\text{.}
 \end{equation*}
 
 Eine (2-dimensionale) \emph{affine Transformation} \( w : \R^2 \to \R^2 \) ist eine Abbildung, die durch
 \begin{equation*}
-  w(x_1,x_2) = \begin{pmatrix}
-    ax_1 + bx_2 + e \\\ cx_1 + dx_2 + f
+  w(x,y) = \begin{pmatrix}
+    a & b \\ c & d
+  \end{pmatrix} \begin{pmatrix}
+    x \\ y
+  \end{pmatrix} + \begin{pmatrix}
+    e \\ f
   \end{pmatrix}
 \end{equation*}
 für feste \( a,b,c,d,e,f \in \R \) beschrieben werden kann. Eine affine Transformation setzt sich also aus einer linearen Transformation und einer Translation zusammen.
@@ -140,27 +143,27 @@ Seien \( (x_1, x_2) \), \( (y_1, y_2) \), \( (z_1, z_2) \) solche Punkte in der 
 Daraufhin lassen sich folgende Gleichungen lösen:
 \begin{align*}
   \begin{pmatrix}
-    x_1 \\ x_2
-  \end{pmatrix} \begin{pmatrix}
     a & b \\ c & d
+  \end{pmatrix} \begin{pmatrix}
+    x_1 \\ x_2
   \end{pmatrix} + \begin{pmatrix}
     e \\ f
   \end{pmatrix} &= \begin{pmatrix}
     \widetilde{x}_1 \\ \widetilde{x}_2
   \end{pmatrix} \\
   \begin{pmatrix}
-    y_1 \\ y_2
-  \end{pmatrix} \begin{pmatrix}
     a & b \\ c & d
+  \end{pmatrix} \begin{pmatrix}
+    y_1 \\ y_2
   \end{pmatrix} + \begin{pmatrix}
     e \\ f
   \end{pmatrix} &= \begin{pmatrix}
     \widetilde{y}_1 \\ \widetilde{y}_2
   \end{pmatrix} \\
   \begin{pmatrix}
-    z_1 \\ z_2
-  \end{pmatrix} \begin{pmatrix}
     a & b \\ c & d
+  \end{pmatrix} \begin{pmatrix}
+    z_1 \\ z_2
   \end{pmatrix} + \begin{pmatrix}
     e \\ f
   \end{pmatrix} &= \begin{pmatrix}
@@ -172,17 +175,14 @@ So lassen sich die 6 Parameter einer zugehörigen affinen Transformation bestimm
 
 \subsection{Iterierte Funktionensysteme (IFS)}
 
-Ein \emph{iteriertes Funktionensystem} (IFS) ist Familie endlich vieler Kontraktionen auf einem vollständigen metrischen Raum, hier sei \( (X,d) \) ein solcher Raum und \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) eine solche Familie.
+Ein \emph{iteriertes Funktionensystem} (IFS) ist \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) --- eine Familie von Kontraktionen auf einem vollständigen metrischen Raum.
 
-Der \emph{Kontraktionskoeffizient} eines solchen IFS ist der größte Kontraktionsfaktor seiner Kontraktionen:
+Der \emph{Kontraktionskoeffizient} eines solchen IFS ist der größte Kontraktionsfaktor der Kontraktionen \( \Phi_1, \dots, \Phi_n \):
 \begin{equation*}
   c = \max\left \{ c_1, \dots,c_n \right \} \quad \text{(\( c_i \coloneqq \) Kontraktionsfaktor von \( \Phi_i \))}
 \end{equation*}
 
-Erhält man durch Vereinigung der Bilder der Kontraktionen von einer festen Teilmenge \( C \subset X \) wieder \( C \), so ist C der \emph{Attraktor} dieses IFS.\@ Formal:
-\begin{equation*}
-  C = \bigcup_{i=1}^n \Phi_i(C)\text{.}
-\end{equation*}
+Erhält man durch Vereinigung der Bilder der Kontraktionen von einer festen Teilmenge \( C \subset X \) wieder \( C \), so ist C der \emph{Attraktor} des IFS \( \left \{ \Phi_1, \dots, \Phi_n \right \} \).
 
 \section{Modellierung ``echter'' Bilder}
 
@@ -192,7 +192,7 @@ Barnsley modelliert solche Bilder entlang von fünf Eigenschaften, die ein Bild 
 
 \subsection{Die Menge aller echten Bilder}
 
-Grob beschrieben ist ein echtes Bild etwas, dass man irgendwo sehen oder sich zumindest zu sehen vorstellen könnte. Es sei \( \mathcal{R} \) die Menge aller echten Bilder und \( \mathcal{I} \in \mathcal{R} \) ein echtes Bild. Dieses muss folgende Eigenschaften erfüllen:
+Grob beschrieben ist ein echtes Bild etwas, dass man irgendwo sehen oder sich zumindest zu sehen vorstellen könnte --- also kein mathematisch greifbares Objekt. Es sei \( \mathcal{R} \) die Menge aller echten Bilder und \( \mathcal{I} \in \mathcal{R} \) ein echtes Bild. Um \( \mathcal{I} \) mathematisch beschreiben und verwenden zu können muss es folgende Eigenschaften erfüllen:
 
 \begin{enumerate}
   \item Es besitzt einen \emph{Träger} \( \largesquare = [a,b] \times [c,d] \subset \R^2 \) und die \emph{Maße} \( (b-a) \) und \( (d-c) \). Der Träger kann beispielsweise eine Tafel oder ein Blatt Papier sein, die Maße sind in einer festen Einheit, beispielsweise Meter.
@@ -214,23 +214,23 @@ Grob beschrieben ist ein echtes Bild etwas, dass man irgendwo sehen oder sich zu
 
 \subsection{Digitalisierung und Rasterung}
 
-Digitalisierung und Rasterung sollen in diesem Vortrag nicht näher besprochen werden. Hier werden \( \mathcal{I} \in \mathcal{R} \) auf Pixel abgebildet, wozu Modelle aus verschiedenen mathematischen Bereichen zur Rasterung und Interpolation verwendet werden.
+Digitalisierung und Rasterung werden verwendet, um ein \( \mathcal{I} \in \mathcal{R} \) auf Pixel abbilden zu können. Hierzu werden Modelle aus verschiedenen Bereichen der Mathematik, insbesondere aus der Maßtheorie verwendet werden, welche in diesem Vortrag nicht näher besprochen werden sollen.
 
 \section{Collage-Theorem}
 
 Wir haben in anderen Vorträgen gesehen, dass mithilfe eines IFS komplexe Bilder mit nur wenigen Kontraktionen beschrieben werden können.
 
-Idee ist nun, statt ein Bild aus einem vorgegebenen IFS zu generieren, ein möglichst passendes IFS für ein gegebenes Bild zu finden. Offensichtlich wird ein gegebenes Bild in der Regel keine erkennbare selbstähnliche Struktur besitzen. Das \emph{Collage-Theorem} erlaubt die Konstruierung von iterierten Funktionensystemen, deren Attraktoren einem gegebenen Bild möglichst genau entsprechen.
+Idee ist nun, statt ein Bild aus einem vorgegebenen IFS zu generieren, ein möglichst passendes IFS für ein gegebenes Bild zu finden. Offensichtlich wird ein gegebenes Bild in der Regel keine erkennbare selbstähnliche Struktur besitzen. Das \emph{Collage-Theorem} erlaubt die Konstruktion von iterierten Funktionensystemen, deren Attraktoren einem gegebenen Bild möglichst genau entsprechen.
 
 \begin{theorembox}
-  \textbf{Collage-Theorem} \\
+  \textbf{Satz}: \ital{Collage-Theorem} (Barnsley, 1985) \\
   \vspace{1mm}
   Sei \( (X,d) \) ein vollständiger metrischer Raum, \( L \in \mathcal{H}(X) \), \( \epsilon \geq 0 \).
 
-  Bestimme ein IFS \( \left \{ \Phi_1,\dots,\Phi_n \right \} \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \) derart, dass
+  Für ein IFS \( \left \{ \Phi_1,\dots,\Phi_n \right \} \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \) und
   \begin{align*}
-    h\left( L,\bigcup_{i=0}^n \Phi_i(L) \right) \leq \epsilon \quad &\text{(\( h \): Hausdorff-Metrik).}
-    \intertext{Dann gilt:}
+    h\left( L,\bigcup_{i=0}^n \Phi_i(L) \right) \leq \epsilon \quad &\text{(\( h \): Hausdorff-Metrik)}
+    \intertext{gilt:}
     h(L,A) \leq \frac{\epsilon}{1 - s} \quad &\text{(\( A \): Attraktor des IFS).}
   \end{align*}
 \end{theorembox}
@@ -238,7 +238,7 @@ Idee ist nun, statt ein Bild aus einem vorgegebenen IFS zu generieren, ein mögl
 Um ein gegebenes Bild \( L \in \mathcal{H}(X) \) durch den Attraktor eines IFS anzunähern, muss die Vereinigung (``Collage'') der Kontraktionen des IFS, angewandt auf das gegebene Bild \( L \), dem gegebenen Bild ähneln (im Sinne der Hausdorff-Metrik).
 
 \begin{proof}{}
-  Wir zeigen, dass in einem vollständigen metrischen Raum \( (X, d) \) für eine Kontraktion \( f: X \to X \) mit einem Konstraktionsfaktor \( 0 \leq s < 1 \) und einem Fixpunkt \( \widetilde{x} \in X \) gilt:
+  Wir zeigen, dass in einem vollständigen metrischen Raum \( (X, d) \) für eine Kontraktion \( f: X \to X \) mit einem Kontraktionsfaktor \( 0 \leq s < 1 \) und einem Fixpunkt \( \widetilde{x} \in X \) gilt:
   \begin{equation*}
     d(x,\widetilde{x}) \leq \frac{d(x,f(x))}{1-s}\text{.}
   \end{equation*} 
@@ -253,21 +253,25 @@ Um ein gegebenes Bild \( L \in \mathcal{H}(X) \) durch den Attraktor eines IFS a
 
 \section{Stetige Abhängigkeit von Parametern}
 
-Ein weiterer wichtiger Satz zur Komprimierung von Bildern ist der Satz über die stetige Abhängigkeit des Attraktors eines IFS von den Parametern des IFS.\@ Diese stetige Abhängigkeit wird uns erlauben, durch kleine Änderungen der Parameter kleine Änderungen am Attraktor eines IFS provozieren zu können (und große durch große). Eine praktische Folgerung ist außerdem, dass zwischen verschiedenen Attraktoren ein stetiger Übergang durch Parameteränderungen konstruiert werden kann --- diese Eigenschaft ist besonders praktisch zur Konstruktion und Komprimierung von animierten Bildern und Filmmaterial.
+Ein weiterer wichtiger Satz zur Komprimierung von Bildern ist der Satz über die stetige Abhängigkeit des Attraktors eines IFS von den Parametern des IFS.\@ Diese stetige Abhängigkeit wird uns erlauben, durch kleine Änderungen der Parameter kleine Änderungen am Attraktor eines IFS provozieren zu können. Eine praktische Folgerung ist außerdem, dass zwischen verschiedenen Attraktoren ein stetiger Übergang durch Parameteränderungen konstruiert werden kann --- diese Eigenschaft ist besonders praktisch zur Konstruktion und Komprimierung von animierten Bildern und Filmmaterial.
 
 \begin{theorembox}
   \textbf{Stetige Abhängigkeit von Parametern --- Fixpunkt} \\
   \vspace{1mm}
-  Es seien \( (P, d_P) \) ein metrischer und \( (X,d) \) ein vollständiger metrischer Raum, außerdem sei \( \Phi_{p \in P} : X \to X \) eine Familie von Kontraktionen auf \( X \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \). Für jedes \( p \in P \) ist also \( \Phi_p \in \Phi \) eine Kontraktion auf \( X \).
+  Es seien \( (P, d_P) \) ein metrischer und \( (X,d) \) ein vollständiger metrischer Raum, außerdem sei \( \Phi : P \times X \to X \) eine Familie von Kontraktionen auf \( X \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \). Für jedes \( p \in P \) ist also \( \Phi(p, \cdot) \) eine Kontraktion auf \( X \).
 
   \vspace{1em}
-  Für jedes \( x \in X \) sei \( \Phi \) stetig auf \( P \). Dann ist der Fixpunkt \( \widetilde{x}_p \) von \( \Phi \) stetig abhängig von \( p \).
+  Für jedes \( x \in X \) sei \( \Phi(\cdot, x) \) stetig. Dann ist der Fixpunkt \( \widetilde{x}(p) \) von \( \Phi \) stetig abhängig von \( p \).
 
   \vspace{1em}
   Das heißt: \( \widetilde{x} : P \to X \) ist stetig.
 \end{theorembox}
 
 \begin{proof}{}
+  Wir verwenden folgende Notationsvereinfachungen:
+  \begin{equation*}
+    \widetilde{x}_p \coloneqq \widetilde{x}(p), \quad \Phi_p(x) \coloneqq \Phi(p,x)\text{.}
+  \end{equation*}
   Es seien \( p \in P \) und \( \epsilon > 0 \) gegeben. Dann gilt für alle \( q \in P \):
   \begin{align*}
     d(\widetilde{x}_p,\widetilde{x}_q) &= d(\Phi_p(\widetilde{x}_p), \Phi_q(\widetilde{x}_q)) \\
@@ -276,37 +280,57 @@ Ein weiterer wichtiger Satz zur Komprimierung von Bildern ist der Satz über die
   \end{align*}
   Das impliziert, dass
   \begin{equation*}
-    d(\widetilde{x}_p, \widetilde{x}_q) \leq \frac{d(\Phi_p(\widetilde{x}_p), \Phi_q(\widetilde{x}_p))}{1-s}
+    d(\widetilde{x}_p, \widetilde{x}_q) \leq \frac{d(\Phi_p(\widetilde{x}_p), \Phi_q(\widetilde{x}_p))}{1-s}\text{.}
   \end{equation*}
-  Die rechte Seite des Terms kann beliebig klein gemacht werden, indem \( q \) nach genug bei \( p \) gewählt wird. Offensichtlich existiert ein \( C \in \R \) derart, dass
+  Geht \( p \) gegen \( q \), dann geht die rechte Seite des Terms aufgrund der Folgenstetigkeit gegen \( 0 \).
   \begin{equation*}
-    d(\Phi_p(x), \Phi_q(x)) \leq C * d(p,q)
+    \qed
   \end{equation*}
-  für alle \( p,q \in P \) und \( x \in X \). Also
-  \begin{align*}
-    d(\widetilde{x}_p, \widetilde{x}_q) \leq \frac{C * d(p,q)}{1-s}\text{.}
-    \intertext{Das ist eine sinnvolle Abschätzung und beendet den Beweis.} \qed
-  \end{align*}
 \end{proof}
 
-Sinnvoll wird diese Erkenntnis allerdings erst, wenn wir die stetige Abhängigkeit zwischen den IFS-Parametern und dem tatsächlichen Attraktor des IFS zeigen können. Dazu schränken wir die Kontraktionen der IFS auf Lipschitz-stetige Kontraktionen ein --- das bedeutet, dass für ein mit \( p \in P \) parametrisiertes IFS
+Sinnvoll wird diese Erkenntnis allerdings erst, wenn wir die stetige Abhängigkeit zwischen den IFS-Parametern und dem tatsächlichen Attraktor des IFS zeigen können.
+
+\begin{theorembox}
+  \textbf{Stetige Abhängigkeit von Parametern --- Attraktor} \\
+  \vspace{1mm}
+  Es sei \( (X,d) \) ein vollständiger metrischer Raum und \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) ein IFS mit Kontraktionskoeffizient \( s \), wobei \( \Phi_i \) von \( p \in (P, d_P) \) im Sinne der Einschränkung
+  \begin{equation*}
+    d(\Phi_{i_p}(x), \Phi_{i_q}(x)) \leq k * d_P(p,q)
+  \end{equation*}
+  für beliebiges \( x \) abhänge.
+
+  \vspace{1em}
+  Dann ist der Attraktor \( A_p \in \mathcal{H}(X) \) stetig von \( p \) mittels der Hausdorff-Metrik \( h(d) \) abhängig.
+\end{theorembox}
+
+Existiert ein \( C \in \R \) derart, dass
 \begin{equation*}
-  \left \{ \Phi_{1_p},\dots,\Phi_{n_p} \right \} \quad \text{(\( \Phi_{i_p} \) stetig)}
+  d(\Phi_p(x), \Phi_q(x)) \leq C * d(p,q)
+\end{equation*}
+für alle \( p,q \in P \) und \( x \in X \), so können wir im letzten Schritt des vorhergegangenen Beweises folgende Abschätzung verwenden:
+\begin{align*}
+  d(\widetilde{x}_p, \widetilde{x}_q) \leq \frac{C * d(p,q)}{1-s}\text{.}
+\end{align*}
+
+Die Existenz eines solchen \( C \) entspricht der Definition von Lipschitz-Stetigkeit, deswegen schränken wir die Kontraktionen der IFS auf Lipschitz-stetige Kontraktionen ein --- das bedeutet, dass für ein mit \( p \in P \) parametrisiertes IFS
+\begin{equation*}
+  \left \{ \Phi_{1p},\dots,\Phi_{np} \right \} \quad \text{(\( \Phi_{ip} \) stetig)}
 \end{equation*}
 ein \( k \in \R_{> 0} \) existiert, sodass gilt:
 \begin{equation*}
-  d(\Phi_{i_p}(x), \Phi_{i_q}(x)) \leq k * d_P(p,q)\text{.}
+  d(\Phi_{ip}(x), \Phi_{iq}(x)) \leq k * d_P(p,q)\text{.}
 \end{equation*}
-Das ist nicht die allgemeinste Forderung, aber sie ist einfach zu handhaben und reicht für unsere Zwecke aus.
+
+Lipschitz-Stetigkeit ist zwar nicht die allgemeinste Forderung, aber sie ist einfach zu handhaben und reicht für unsere Zwecke aus.
 
 Unser Ziel ist nun, für beliebiges \( B \in \mathcal{H}(X) \) nachzuweisen, dass gilt:
 \begin{equation*}
-  h(\Phi_{i_p}(B), \Phi_{i_q}(B)) \leq k * d_P(p,q)\text{.} \tag*{(1)}
+  h(\Phi_{i_p}(B), \Phi_{i_q}(B)) \leq k * d_P(p,q)\text{.}
 \end{equation*}
 
 Das bedeutet, dass der ``Unterschied'' zwischen den Bildern von \( B \) unter zwei verschieden parametrierten Kontraktionen nach oben durch ein Vielfaches des Abstands der Parameter abgeschätzt werden kann.
 
-\begin{proof}{(1)}
+\begin{proof}{}
   Diese Aussage kann leicht nachgewiesen werden, indem die Eigenschaften einer Metrik nachgegangen werden:
   \begin{equation*}
     h(\Phi_p(B), \Phi_q(B)) = \max\left \{ d(\Phi_p(B), \Phi_q(B)), d(\Phi_q(B), \Phi_p(B)) \right \}
@@ -316,7 +340,7 @@ Das bedeutet, dass der ``Unterschied'' zwischen den Bildern von \( B \) unter zw
     d(\Phi_p(B), \Phi_q(B)) &= \max_{x \in \Phi_p(B)}(d(x, \Phi_q(B)))\text{,} \\
     d(x,\Phi_q(B)) &= \min_{y \in \Phi_q(B)}(d(x,y))\text{.}
   \end{align*}
-  \( x \in \Phi_p(B) \) bedeutet, dass es ein \( x' \in B \) gibt, sodass \( x = \Phi_p(x') \). Außerdem gibt es dan ein \( \Phi_q(x') \in \Phi_q(B) \). Für diesen Punkt gilt unsere Anforderung. Es folgt
+  Ist \( x \in \Phi_p(B) \), so bedeutet das, dass es ein \( x' \in B \) gibt, sodass \( x = \Phi_p(x') \). Außerdem gilt dann, dass \( \Phi_q(x') \in \Phi_q(B) \). Es folgt
   \begin{equation*}
     d(x, \Phi_q(x')) \leq k * d_P(p,q) \Rightarrow \min_{y \in \Phi_q(B)}(d(x,y)) \leq d(x, \Phi_q(x')) \leq k * d_P(p,q)\text{.}
   \end{equation*}
@@ -343,25 +367,20 @@ Die Vereinigung solcher Bilder kann sich von Parameter zu Parameter offensichtli
 \end{equation*}
 wobei
 \begin{equation*}
-  W_p(B) = \bigcup_{i=1}^n \Phi_{i_p}(B)\text{,}
+  W_p(B) \coloneqq \bigcup_{i=1}^n \Phi_{i_p}(B)\text{,}
 \end{equation*}
 \( W_q(B) \) respektive. Wenden wir nun das Resultat der stetigen Abhängigkeit von Fixpunkten an, so erhalten wir
 \begin{equation*}
-  h(A_p,A_q) \leq \frac{h(A_p, W_q(A_p))}{1-s} \leq k * \frac{d_P(p,q)}{1-s}\text{.}
+  h(A_p,A_q) \leq \frac{h(A_p, W_q(A_p))}{1-s} \leq k * \frac{d_P(p,q)}{1-s} \quad \text{(Attraktor \( A_p \), abhängig von Parameter \( p \)).}
 \end{equation*}
-Das lässt sich in folgendem Satz zusammenfassen:
 
-\begin{theorembox}
-  \textbf{Stetige Abhängigkeit von Parametern --- Attraktor} \\
-  \vspace{1mm}
-  Es sei \( (X,d) \) ein vollständiger metrischer Raum und \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) ein IFS mit Kontraktionskoeffizient \( s \), wobei \( \Phi_i \) von \( p \in (P, d_P) \) im Sinne der Einschränkung
-  \begin{equation*}
-    d(\Phi_{i_p}(x), \Phi_{i_q}(x)) \leq k * d_P(p,q)
-  \end{equation*}
-  für beliebiges \( x \) abhänge.
+Damit ergibt sich der Satz.
 
-  \vspace{1em}
-  Dann ist der Attraktor \( A_p \in \mathcal{H}(X) \) stetig von \( p \) mittels der Hausdorff-Metrik \( h(d) \) abhängig.
-\end{theorembox}
+\section{Quellen}
+
+\begin{itemize}
+  \item Barnsley --- \textbf{Fractals Everywhere} (1993)
+  \item Barnsley, Hurd --- \textbf{Fractal Image Compression} (1993)
+\end{itemize}
 
 \end{document}
