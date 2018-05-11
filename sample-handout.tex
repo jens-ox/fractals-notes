@@ -295,7 +295,7 @@ Sinnvoll wird diese Erkenntnis allerdings erst, wenn wir die stetige Abhängigke
   \vspace{1mm}
   Es sei \( (X,d) \) ein vollständiger metrischer Raum und \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) ein IFS mit Kontraktionskoeffizient \( s \), wobei \( \Phi_i \) von \( p \in (P, d_P) \) im Sinne der Einschränkung
   \begin{equation*}
-    d(\Phi_{i_p}(x), \Phi_{i_q}(x)) \leq k * d_P(p,q)
+    d(\Phi_{i,p}(x), \Phi_{i,q}(x)) \leq k * d_P(p,q)
   \end{equation*}
   für beliebiges \( x \) abhänge.
 
@@ -325,7 +325,7 @@ Lipschitz-Stetigkeit ist zwar nicht die allgemeinste Forderung, aber sie ist ein
 
 Unser Ziel ist nun, für beliebiges \( B \in \mathcal{H}(X) \) nachzuweisen, dass gilt:
 \begin{equation*}
-  h(\Phi_{i_p}(B), \Phi_{i_q}(B)) \leq k * d_P(p,q)\text{.}
+  h(\Phi_{i,p}(B), \Phi_{i,q}(B)) \leq k * d_P(p,q)\text{.}
 \end{equation*}
 
 Das bedeutet, dass der ``Unterschied'' zwischen den Bildern von \( B \) unter zwei verschieden parametrierten Kontraktionen nach oben durch ein Vielfaches des Abstands der Parameter abgeschätzt werden kann.
@@ -352,13 +352,13 @@ Das bedeutet, dass der ``Unterschied'' zwischen den Bildern von \( B \) unter zw
   \begin{equation*}
     h(\Phi_p(B), \Phi_q(B)) \leq k * d_P(p,q)\text{.}
   \end{equation*}
-  Für endliches \( n \) erhalten wir ein endliches IFS \( \left \{ \Phi_{1_p},\dots,\Phi_{n_p} \right \} \) mit zugehörigen Konstanten \( k_1,\dots,k_n \). Wähle
+  Für endliches \( n \) erhalten wir ein endliches IFS \( \left \{ \Phi_{1_p},\dots,\Phi_{n,p} \right \} \) mit zugehörigen Konstanten \( k_1,\dots,k_n \). Wähle
   \begin{equation*}
     k \coloneqq \max\left \{ k_1,\dots,k_n \right \}\text{.}
   \end{equation*}
   und somit erhalten wir letztendlich
   \begin{equation*}
-    h(\Phi_{i_p}(B),\Phi_{i_q}(B)) \leq k * d_P(p,q)\text{.}\qed
+    h(\Phi_{i,p}(B),\Phi_{i,q}(B)) \leq k * d_P(p,q)\text{.}\qed
   \end{equation*}
 \end{proof}
 Die Vereinigung solcher Bilder kann sich von Parameter zu Parameter offensichtlich nicht stärker verändern als die maximale Hausdorff-Distanz von oben. Es gilt also
@@ -367,7 +367,7 @@ Die Vereinigung solcher Bilder kann sich von Parameter zu Parameter offensichtli
 \end{equation*}
 wobei
 \begin{equation*}
-  W_p(B) \coloneqq \bigcup_{i=1}^n \Phi_{i_p}(B)\text{,}
+  W_p(B) \coloneqq \bigcup_{i=1}^n \Phi_{i,p}(B)\text{,}
 \end{equation*}
 \( W_q(B) \) respektive. Wenden wir nun das Resultat der stetigen Abhängigkeit von Fixpunkten an, so erhalten wir
 \begin{equation*}
