@@ -5,13 +5,9 @@
 \author{Jens Ochsenmeier}
 \date{}
 
-% bold math
-\usepackage{bm}
-\usepackage[parfill]{parskip}
-
 \begin{document}
 
-\maketitle% this prints the handout title, author, and date
+\maketitle
 
 \begin{abstract}
 \noindent
@@ -24,7 +20,7 @@
   \end{enumerate}
 \end{abstract}
 
-\section{Recap --- bisherige Themen}
+\section{Wiederholung --- bisherige Themen}
 
 \subsection{Metrischer Raum}
 
@@ -207,7 +203,7 @@ Grob beschrieben ist ein echtes Bild etwas, dass man irgendwo sehen oder sich zu
 
   \item \( \mathcal{R} \) ist unter Zuschneiden von Bildern abgeschlossen. Das bedeutet, dass ein fester Bereich \( \widetilde{\mathcal{I}} \) eines \( \mathcal{I} \in \mathcal{R} \) ein eigenständiges Bild und somit \( \in \mathcal{R} \) ist.
 
-  \item \( \mathcal{R} \) ist unter invertierbaren affinen Transformationen abgeschlossen. Das bedeutet, dass kein \( \mathcal{I} \in \mathcal{R} \) beliebig vergrößert, verkleinert, gestreckt, gespiegelt, gestaucht und repositioniert werden kann, sodass die Transformation nicht in \( \mathcal{R} \) liegt.
+  \item \( \mathcal{R} \) ist unter invertierbaren affinen Transformationen abgeschlossen. Das bedeutet, dass kein \( \mathcal{I} \in \mathcal{R} \) beliebig vergrößert, verkleinert, gestreckt, gespiegelt, gestaucht und neu positioniert werden kann, sodass die Transformation nicht in \( \mathcal{R} \) liegt.
 \end{enumerate}
 
 \subsection{Digitalisierung und Rasterung}
@@ -382,7 +378,7 @@ Die Gründe für Bildkomprimierung sind schnell erklärt: Durch sie wird die Spe
 
 \subsection{Fraktale Bildkomprimierung}
 
-Grundgedanke der fraktalen Bildkomprimierung ist folgender: Das Bild des Farns von vorhin kann vollständig durch die Angabe der Parameter für die drei affinen Transformationen spezifizert und reproduziert werden --- bei beliebiger Auflösung. Das bedeutet, dass nur 18 Zahlen (6 pro Transformation), also ungefähr 18 Byte, gespeichert werden müssen. Um das Bild des Farns auf einer pro-Pixel-Basis zu speichern bräuchte man ein Bit pro Pixel, also 1 Byte für 8 Pixel. Schon für eine geringe Auflösung (200 * 400 Pixel) bräuchte man also 10 Kilobyte --- über 500 mal mehr als für die fraktale Darstellung.
+Grundgedanke der fraktalen Bildkomprimierung ist folgender: Das Bild des Farns von vorhin kann vollständig durch die Angabe der Parameter für die drei affinen Transformationen angegeben und reproduziert werden --- bei beliebiger Auflösung. Das bedeutet, dass nur 18 Zahlen (6 pro Transformation), also ungefähr 18 Byte, gespeichert werden müssen. Um das Bild des Farns auf einer pro-Pixel-Basis zu speichern bräuchte man ein Bit pro Pixel, also 1 Byte für 8 Pixel. Schon für eine geringe Auflösung (200 * 400 Pixel) bräuchte man also 10 Kilobyte --- über 500 mal mehr als für die fraktale Darstellung.
 
 Wir wissen bereits, dass man für gegebene Parameter einfach das zugehörige Fraktal generieren kann. Die Frage ist nun, wie man für ein gegebenes Bild eine Menge affinen Transformationen bestimmen kann, mithilfe welcher sich das Bild hinreichend gut generieren lässt.
 
