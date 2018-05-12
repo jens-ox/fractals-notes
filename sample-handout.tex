@@ -376,11 +376,76 @@ wobei
 
 Damit ergibt sich der Satz.
 
+\section{Bildkomprimierung}
+
+\subsection{Warum Bildkomprimierung?}
+
+Die Gründe für Bildkomprimierung sind schnell erklärt: Durch sie wird die Speicherung von Bildern wesentlich kostengünstiger und das Übertragen von Bildern geht schneller. Vorteil hierbei ist, dass das menschliche Auge unempfindlich gegenüber einer Vielzahl von Arten des Informationsverlustes ist.
+
+\subsection{Fraktale Bildkomprimierung}
+
+Grundgedanke der fraktalen Bildkomprimierung ist folgender: Das Bild des Farns von vorhin kann vollständig durch die Angabe der Parameter für die drei affinen Transformationen spezifizert und reproduziert werden --- bei beliebiger Auflösung. Das bedeutet, dass nur 18 Zahlen (6 pro Transformation), also ungefähr 18 Byte, gespeichert werden müssen. Um das Bild des Farns auf einer pro-Pixel-Basis zu speichern bräuchte man ein Bit pro Pixel, also 1 Byte für 8 Pixel. Schon für eine geringe Auflösung (200 * 400 Pixel) bräuchte man also 10 Kilobyte --- über 500 mal mehr als für die fraktale Darstellung.
+
+Wir wissen bereits, dass man für gegebene Parameter einfach das zugehörige Fraktal generieren kann. Die Frage ist nun, wie man für ein gegebenes Bild eine Menge affinen Transformationen bestimmen kann, mithilfe welcher sich das Bild hinreichend gut generieren lässt.
+
+Problem echter Bilder ist, dass sie in aller Regel nicht die selbstähnlichen Eigenschaften von Fraktalen haben. Allerdings lassen sich Teile des Bildes finden, welche sich mithilfe von affinen Transformationen ähneln.
+
+\subsection{Partitionierte IFS}
+
+Die Frage ist nun, wie sich diese Eigenschaft mathematisch ausnutzen lässt. Dazu müssen wir die affinen Transformationen der bereits bekannten IFS um zwei Funktionen ergänzen:
+
+\begin{enumerate}
+  \item Eine neue Vorschrift adaptiert pro Transformation die Helligkeit.
+  \item Eine Maske legt pro Transformation fest, welcher Teil des Urbilds abgebildet wird.
+\end{enumerate}
+
+Das heißt, dass nun Teilbereiche des Bilds separat transformiert werden.
+
+Formal ist eine Transformation eines PIFS
+
+\begin{equation*}
+  w_i: \square \supset D_i \to w_i(D_i) \eqqcolon R_i \subset \square, \quad w_i(x,y,z) = \begin{pmatrix}
+    a_i & b_i & 0 \\
+    c_i & d_i & 0 \\
+    0 & 0 & g_i
+  \end{pmatrix} * \begin{pmatrix}
+    x \\ y \\ z
+  \end{pmatrix} + \begin{pmatrix}
+    e_i \\ f_i \\ h_i
+  \end{pmatrix}\text{,}
+\end{equation*}
+
+wobei \( g \) und \( h \) die ``neuen'' Parameter sind --- \( g \) ist für den Kontrast und \( h \) für die Helligkeit zuständig.
+
+Damit das gewünschte Bild \( \mathcal{I} \in \mathcal{H}(X) \) Attraktor des PIFS ist fordern wir
+\begin{equation*}
+  \bigcup_{i=1}^n R_i = \mathcal{I}
+\end{equation*}
+und
+\begin{equation*}
+  i \neq j \Rightarrow R_i \cap R_j = \varnothing\text{.}
+\end{equation*}
+
+\subsection{PIFS bestimmen}
+
+Man kann die Parameter eines PIFS beispielsweise folgendermaßen bestimmen:
+
+\begin{enumerate}
+  \item Unterteile das gegebene Bild in nicht-überlappende Quadrate (8*8 Pixel) \( R \coloneqq \left \{ R_1,\dots, R_n \right \} \).
+  \item Unterteile das gegebene Bild in überlappende Quadrate (16*16 Pixel) \( D \coloneqq \left \{ D_1, \dots, D_m \right \} \).
+  \item Durchsuche für jede der 8 möglichen Transformationen eines \( R_i \) alle \( D \) nach einem \( D_j \), sodass sich \( R_i \) und \( D_j \) unter der gegebenen Transformation so sehr ähneln wie möglich.
+  \item Passe für jede Transformation Belichtung und Kontrast an.
+\end{enumerate}
+
+Resultat dieses Algorithmus ist ein PIFS, bestehend aus Transformationen für jedes \( R_i \in R \).
+
+
 \section{Quellen}
 
 \begin{itemize}
   \item Barnsley --- \textbf{Fractals Everywhere} (1993)
   \item Barnsley, Hurd --- \textbf{Fractal Image Compression} (1993)
+  \item Fisher --- \textbf{Fractal Image Compression} (1992)
 \end{itemize}
 
 \end{document}
