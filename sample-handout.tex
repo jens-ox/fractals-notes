@@ -19,10 +19,8 @@
   \begin{enumerate}
     \item eine Übersicht über die bisher erlernten Werkzeuge, die für die theoretischen Grundlagen der fraktalen Bildcodierung benötigt werden,
     \item das Collage-Theorem,
-    \item die stetige Abhängigkeit zwischen dem Attraktor eines IFS und den Parametern der Kontraktionen,
-    \item (TODO) die Erläuterung von einfachen fraktalen Bildcodierungen anhand der Quadtree-Methode,
-    \item (TODO) eine Übersicht über fortgeschrittene Methoden der fraktalen Bildcodierung und
-    \item (TODO) der Vergleich von fraktaler Bildcodierung mit anderen, DCT-basierten Bildkomprimierungsverfahren.
+    \item die stetige Abhängigkeit zwischen dem Attraktor eines IFS und den Parametern der Kontraktionen und
+    \item die Erläuterung von einfachen fraktalen Bildcodierungen anhand der Quadtree-Methode.
   \end{enumerate}
 \end{abstract}
 
@@ -438,6 +436,15 @@ Man kann die Parameter eines PIFS beispielsweise folgendermaßen bestimmen:
 \end{enumerate}
 
 Resultat dieses Algorithmus ist ein PIFS, bestehend aus Transformationen für jedes \( R_i \in R \).
+
+\subsection{Verbesserungen}
+
+Dieser Quadtree-basierte Algorithmus ist zwar relativ naiv, erzielt allerdings erstaunlich gute Ergebnisse. Er lässt sich deutlich verbessern, indem man
+
+\begin{itemize}
+  \item mehr verschieden große Quadrate vergleicht und
+  \item andere geometrische Formen als Quadrate wählt.
+\end{itemize}
 
 
 \section{Quellen}
