@@ -5,6 +5,9 @@
 \author{Jens Ochsenmeier}
 \date{}
 
+\mathcode`\*="8000
+{\catcode`\*\active\gdef*{\cdot}}
+
 \begin{document}
 
 \maketitle
@@ -169,7 +172,7 @@ So lassen sich die 6 Parameter einer zugehörigen affinen Transformation bestimm
 
 \subsection{Iterierte Funktionensysteme (IFS)}
 
-Ein \emph{iteriertes Funktionensystem} (IFS) ist \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) --- eine Familie von Kontraktionen auf einem vollständigen metrischen Raum.
+Ein \emph{iteriertes Funktionensystem} (IFS, \( \left \{ \Phi_1, \dots, \Phi_n \right \} \)) ist  eine Familie von Kontraktionen auf einem vollständigen metrischen Raum.
 
 Der \emph{Kontraktionskoeffizient} eines solchen IFS ist der größte Kontraktionsfaktor der Kontraktionen \( \Phi_1, \dots, \Phi_n \):
 \begin{equation*}
@@ -252,13 +255,11 @@ Ein weiterer wichtiger Satz zur Komprimierung von Bildern ist der Satz über die
 \begin{theorembox}
   \textbf{Stetige Abhängigkeit von Parametern --- Fixpunkt} \\
   \vspace{1mm}
-  Es seien \( (P, d_P) \) ein metrischer und \( (X,d) \) ein vollständiger metrischer Raum, außerdem sei \( \Phi : P \times X \to X \) eine Familie von Kontraktionen auf \( X \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \). Für jedes \( p \in P \) ist also \( \Phi(p, \cdot) \) eine Kontraktion auf \( X \).
+  Es seien \( (P, d_P) \) ein metrischer und \( (X,d) \) ein vollständiger metrischer Raum, außerdem sei \( \Phi : P \times X \to X \) eine Familie von Kontraktionen auf \( X \) mit Kontraktionskoeffizient \( 0 \leq s < 1 \). Für jedes \( p \in P \) ist also \( \Phi(p, \cdot) \) eine Kontraktion auf \( X \) und für jedes \( x \in X \) sei \( \Phi(\cdot, x) \) stetig. 
 
   \vspace{1em}
-  Für jedes \( x \in X \) sei \( \Phi(\cdot, x) \) stetig. Dann ist der Fixpunkt \( \widetilde{x}(p) \) von \( \Phi \) stetig abhängig von \( p \).
 
-  \vspace{1em}
-  Das heißt: \( \widetilde{x} : P \to X \) ist stetig.
+  Dann ist der Fixpunkt \( \widetilde{x}(p) \) von \( \Phi \) stetig abhängig von \( p \). Das heißt: \( \widetilde{x} : P \to X \) ist stetig.
 \end{theorembox}
 
 \begin{proof}{}
@@ -287,37 +288,17 @@ Sinnvoll wird diese Erkenntnis allerdings erst, wenn wir die stetige Abhängigke
 \begin{theorembox}
   \textbf{Stetige Abhängigkeit von Parametern --- Attraktor} \\
   \vspace{1mm}
-  Es sei \( (X,d) \) ein vollständiger metrischer Raum und \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) ein IFS mit Kontraktionskoeffizient \( s \), wobei \( \Phi_i \) von \( p \in (P, d_P) \) im Sinne der Einschränkung
+  Es seien \( (P, d_P) \) ein metrischer, \( (X,d) \) ein vollständiger metrischer Raum und \( \left \{ \Phi_1, \dots, \Phi_n \right \} \) ein IFS mit Kontraktionskoeffizient \( s \), wobei \( \Phi_i : P \times X \to X \) eine Familie von Kontraktionen auf \( X \) sei. Außerdem hänge \( \Phi_i \) von \( p \in P \) im Sinne der Einschränkung
   \begin{equation*}
     d(\Phi_{i,p}(x), \Phi_{i,q}(x)) \leq k * d_P(p,q)
   \end{equation*}
-  für beliebiges \( x \) abhänge.
+  für beliebiges \( x \) ab.
 
   \vspace{1em}
   Dann ist der Attraktor \( A_p \in \mathcal{H}(X) \) stetig von \( p \) mittels der Hausdorff-Metrik \( h(d) \) abhängig.
 \end{theorembox}
 
-Existiert ein \( C \in \R \) derart, dass
-\begin{equation*}
-  d(\Phi_p(x), \Phi_q(x)) \leq C * d(p,q)
-\end{equation*}
-für alle \( p,q \in P \) und \( x \in X \), so können wir im letzten Schritt des vorhergegangenen Beweises folgende Abschätzung verwenden:
-\begin{align*}
-  d(\widetilde{x}_p, \widetilde{x}_q) \leq \frac{C * d(p,q)}{1-s}\text{.}
-\end{align*}
-
-Die Existenz eines solchen \( C \) entspricht der Definition von Lipschitz-Stetigkeit, deswegen schränken wir die Kontraktionen der IFS auf Lipschitz-stetige Kontraktionen ein --- das bedeutet, dass für ein mit \( p \in P \) parametrisiertes IFS
-\begin{equation*}
-  \left \{ \Phi_{1p},\dots,\Phi_{np} \right \} \quad \text{(\( \Phi_{ip} \) stetig)}
-\end{equation*}
-ein \( k \in \R_{> 0} \) existiert, sodass gilt:
-\begin{equation*}
-  d(\Phi_{ip}(x), \Phi_{iq}(x)) \leq k * d_P(p,q)\text{.}
-\end{equation*}
-
-Lipschitz-Stetigkeit ist zwar nicht die allgemeinste Forderung, aber sie ist einfach zu handhaben und reicht für unsere Zwecke aus.
-
-Unser Ziel ist nun, für beliebiges \( B \in \mathcal{H}(X) \) nachzuweisen, dass gilt:
+Wir wollen nachweisen, dass für beliebiges \( B \in \mathcal{H}(X) \) gilt:
 \begin{equation*}
   h(\Phi_{i,p}(B), \Phi_{i,q}(B)) \leq k * d_P(p,q)\text{.}
 \end{equation*}
@@ -335,40 +316,41 @@ Das bedeutet, dass der ``Unterschied'' zwischen den Bildern von \( B \) unter zw
     d(x,\Phi_q(B)) &= \min_{y \in \Phi_q(B)}(d(x,y))\text{.}
   \end{align*}
   Ist \( x \in \Phi_p(B) \), so bedeutet das, dass es ein \( x' \in B \) gibt, sodass \( x = \Phi_p(x') \). Außerdem gilt dann, dass \( \Phi_q(x') \in \Phi_q(B) \). Es folgt
-  \begin{equation*}
-    d(x, \Phi_q(x')) \leq k * d_P(p,q) \Rightarrow \min_{y \in \Phi_q(B)}(d(x,y)) \leq d(x, \Phi_q(x')) \leq k * d_P(p,q)\text{.}
-  \end{equation*}
+  \begin{multline*}
+    d(x, \Phi_q(x')) = d(\Phi_p(x'),\Phi_q(x')) \leq k * d_P(p,q) \\ \Rightarrow d(x, \Phi_q(B)) = \min_{y \in \Phi_q(B)}(d(x,y)) \leq d(x, \Phi_q(x')) \leq k * d_P(p,q)\text{.}
+  \end{multline*}
   Wir erhalten also
   \begin{equation*}
-    d(\Phi_p(B), \Phi_q(B)) \leq k * d_P(p,q)\text{.}
+    d(\Phi_p(B), \Phi_q(B)) = \max_{x \in \Phi_p(B)}(d(x, \Phi_q(B))) \leq k * d_P(p,q)\text{.}
   \end{equation*}
   Die Argumentation für \( d(\Phi_q(B), \Phi_p(B)) \) ist analog, wir haben also
-  \begin{equation*}
+  \begin{equation}\label{eq:1}
     h(\Phi_p(B), \Phi_q(B)) \leq k * d_P(p,q)\text{.}
-  \end{equation*}
-  Für endliches \( n \) erhalten wir ein endliches IFS \( \left \{ \Phi_{1_p},\dots,\Phi_{n,p} \right \} \) mit zugehörigen Konstanten \( k_1,\dots,k_n \). Wähle
+  \end{equation}
+  Für endliches \( n \) sei ein endliches IFS \( \left \{ \Phi_{1,p},\dots,\Phi_{n,p} \right \} \) mit zugehörigen Konstanten \( k_1,\dots,k_n \) gegeben. Wähle
   \begin{equation*}
     k \coloneqq \max\left \{ k_1,\dots,k_n \right \}\text{.}
   \end{equation*}
-  und somit erhalten wir letztendlich
+  Dann gilt mit \autoref{eq:1}
   \begin{equation*}
-    h(\Phi_{i,p}(B),\Phi_{i,q}(B)) \leq k * d_P(p,q)\text{.}\qed
+    h(\Phi_{i,p}(B),\Phi_{i,q}(B)) \leq k * d_P(p,q)\text{.}
+  \end{equation*}
+
+  Die Vereinigung solcher Bilder kann sich von Parameter zu Parameter offensichtlich nicht stärker verändern als die maximale Hausdorff-Distanz von oben. Es gilt also
+  \begin{equation*}
+    h\left( \bigcup_{i=1}^n \Phi_{i,p}(B), \bigcup_{i=1}^n \Phi_{i,q}(B) \right) \leq k * d_P(p,q)\text{.}
+  \end{equation*}
+  
+  Wenden wir nun das Resultat der stetigen Abhängigkeit von Fixpunkten an, so erhalten wir
+  \begin{equation*}
+    h(A_p,A_q) \leq \frac{h(A_p, W_q(A_p))}{1-s} \leq k * \frac{d_P(p,q)}{1-s} \quad \text{(Attraktor \( A_p \), abhängig von Parameter \( p \)).}
+  \end{equation*}
+
+  Damit ergibt sich der Satz.
+  \begin{equation*}
+    \qed
   \end{equation*}
 \end{proof}
-Die Vereinigung solcher Bilder kann sich von Parameter zu Parameter offensichtlich nicht stärker verändern als die maximale Hausdorff-Distanz von oben. Es gilt also
-\begin{equation*}
-  h\left( W_p(B), W_q(B) \right) \leq k * d_P(p,q)\text{,}
-\end{equation*}
-wobei
-\begin{equation*}
-  W_p(B) \coloneqq \bigcup_{i=1}^n \Phi_{i,p}(B)\text{,}
-\end{equation*}
-\( W_q(B) \) respektive. Wenden wir nun das Resultat der stetigen Abhängigkeit von Fixpunkten an, so erhalten wir
-\begin{equation*}
-  h(A_p,A_q) \leq \frac{h(A_p, W_q(A_p))}{1-s} \leq k * \frac{d_P(p,q)}{1-s} \quad \text{(Attraktor \( A_p \), abhängig von Parameter \( p \)).}
-\end{equation*}
-
-Damit ergibt sich der Satz.
 
 \section{Bildkomprimierung}
 
