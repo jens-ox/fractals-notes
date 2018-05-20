@@ -244,8 +244,16 @@ Um ein gegebenes Bild \( L \in \mathcal{H}(X) \) durch den Attraktor eines IFS a
     d(x,\widetilde{x}) &= d\left( x, \underset{n \to \infty}{\lim} f^n(x) \right) = \underset{n \to \infty}{\lim}d(x,f^n(x)) \\
     &\leq \underset{n \to \infty}{\lim}\sum_{m = 1}^n d(f^{m-1}(x),f^m(x)) \\
     &\leq \underset{n \to \infty}{\lim} d(x,f(x))(1+s+\cdots+s^{n-1}) \\
-    &\leq \frac{d(x,f(x))}{1-s}\text{.} \qed
+    &\leq \frac{d(x,f(x))}{1-s}\text{.}
   \end{align*}
+  Wählt man nun
+  \begin{equation*}
+    (X,d) \coloneqq (\mathcal{H}(X), h) \qquad \text{und} \qquad f : \mathcal{H}(X) \to \mathcal{H}(X)\text{,} \quad L \mapsto \bigcup_{i=0}^n \Phi_i(L)\text{,}
+  \end{equation*}
+  so erhält man
+  \begin{equation*}
+    h(L, A) \leq \frac{h\left( L, \bigcup_{i=0}^n \Phi_i(L) \right)}{1-s} \leq \frac{\epsilon}{1-s}\text{.}\qed
+  \end{equation*}
 \end{proof}
 
 \section{Stetige Abhängigkeit von Parametern}
