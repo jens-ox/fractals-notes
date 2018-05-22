@@ -306,13 +306,6 @@ Sinnvoll wird diese Erkenntnis allerdings erst, wenn wir die stetige Abhängigke
   Dann ist der Attraktor \( A_p \in \mathcal{H}(X) \) stetig von \( p \) mittels der Hausdorff-Metrik \( h(d) \) abhängig.
 \end{theorembox}
 
-Wir wollen nachweisen, dass für beliebiges \( B \in \mathcal{H}(X) \) gilt:
-\begin{equation*}
-  h(\Phi_{i,p}(B), \Phi_{i,q}(B)) \leq k * d_P(p,q)\text{.}
-\end{equation*}
-
-Das bedeutet, dass der ``Unterschied'' zwischen den Bildern von \( B \) unter zwei verschieden parametrierten Kontraktionen nach oben durch ein Vielfaches des Abstands der Parameter abgeschätzt werden kann.
-
 \begin{proof}{}
   Diese Aussage kann leicht nachgewiesen werden, indem die Eigenschaften einer Metrik nachgegangen werden:
   \begin{equation*}
@@ -347,7 +340,7 @@ Das bedeutet, dass der ``Unterschied'' zwischen den Bildern von \( B \) unter zw
   
   Wenden wir nun das Resultat der stetigen Abhängigkeit von Fixpunkten an, so erhalten wir
   \begin{equation*}
-    h(A_p,A_q) \leq \frac{h(A_p, W_q(A_p))}{1-s} \leq k * \frac{d_P(p,q)}{1-s} \quad \text{(Attraktor \( A_p \), abhängig von Parameter \( p \)).}
+    h(A_p,A_q) \leq \frac{h(A_p, \bigcup_{i=1}^n \Phi_{i,q}(A_p))}{1-s} \leq k * \frac{d_P(p,q)}{1-s} \quad \text{(Attraktor \( A_p \), abhängig von Parameter \( p \)).}
   \end{equation*}
 
   Damit ergibt sich der Satz.
